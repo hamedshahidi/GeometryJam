@@ -190,11 +190,11 @@ class PlayScene4 extends Phaser.Scene {
         {
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
             var next = this.physics.add.staticImage(400,500, "mainmenu").setScale(1);
-            scoretxt = this.add.text(220, 210, 'score: '+score, { fontSize: '32px', fill: '#000' });
+            scoretxt = this.add.text(220, 230, 'score: '+score, { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(scoretxt);
-            bullettxt = this.add.text(270, 260, 'bullets: '+bulletCount, { fontSize: '32px', fill: '#000' });
+            bullettxt = this.add.text(270, 280, 'bullets: '+bulletCount, { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(bulletCount);
-            accuracytxt = this.add.text(320,310, 'accuracy: '+accuracy+ '%', { fontSize: '32px', fill: '#000' });
+            accuracytxt = this.add.text(320,330, 'accuracy: '+accuracy+ '%', { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(accuracytxt);
             var nexttxt = this.add.text()
 
