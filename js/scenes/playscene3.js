@@ -36,6 +36,7 @@ class PlayScene3 extends Phaser.Scene {
         count3 = 0;
         bulletCount = 0;
         accuracy = 0;
+        var trigger = null;
 
         //SETTING SCORE BAR
         scoretxt = this.add.text(600, 16, 'score: 0', { fontSize: '16px', fill: '#fff' });
@@ -170,8 +171,9 @@ class PlayScene3 extends Phaser.Scene {
             }
         }
 
-        if(count3 >= 1)
+        if(count3 >= 1 && trigger === null)
         {
+            trigger = 1;
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
             var next = this.physics.add.staticImage(400,500, "next").setScale(1);
             scoretxt = this.add.text(220, 230, 'score: '+score, { fontSize: '32px', fill: '#000' });

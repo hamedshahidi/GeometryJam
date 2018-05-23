@@ -38,6 +38,7 @@ class PlayScene4 extends Phaser.Scene {
         count4 = 0;
         bulletCount = 0;
         accuracy = 0;
+        var trigger = null;
 
         //SETTING SCORE BAR
         scoretxt = this.add.text(600, 16, 'score: 0', { fontSize: '16px', fill: '#fff' });
@@ -186,8 +187,9 @@ class PlayScene4 extends Phaser.Scene {
         }
 
         //SET THE KILL COUNT FOR GOING TO NEXT SCENE
-        if(count4 >= 42)
+        if(count4 >= 42 && trigger === null)
         {
+            trigger = 1;
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
             var next = this.physics.add.staticImage(400,500, "mainmenu").setScale(1);
             scoretxt = this.add.text(220, 230, 'score: '+score, { fontSize: '32px', fill: '#000' });

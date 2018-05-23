@@ -22,6 +22,7 @@ var bullettxt;
 var accuracytxt;
 var accuracy;
 
+
 class PlayScene1 extends Phaser.Scene {
     constructor()
     {
@@ -35,6 +36,7 @@ class PlayScene1 extends Phaser.Scene {
         bulletCount = 0;
         accuracy = 0;
         count1 = 0;
+        var trigger = null;
 
         //SETTING SCORE BAR
         scoretxt = this.add.text(600, 16, 'score: 0', { fontSize: '14px', fill: '#fff' });
@@ -168,8 +170,9 @@ class PlayScene1 extends Phaser.Scene {
         }
 
         //SET THE KILL COUNT FOR GOING TO NEXT SCENE
-        if(count1 >= 10 )
+        if(count1 >= 10 && trigger === null)
         {
+            trigger = 1;
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
             var next = this.physics.add.staticImage(400,500, "next").setScale(1);
             scoretxt = this.add.text(220, 230, 'score: '+score, { fontSize: '32px', fill: '#000' });
