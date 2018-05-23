@@ -12,6 +12,7 @@ var logoTxt;
 var ccontrols;
 var llevels;
 var pplay;
+var credits;
 
 class StartScene extends Phaser.Scene {
     constructor(){
@@ -26,6 +27,7 @@ class StartScene extends Phaser.Scene {
     this.C = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
     this.L = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
     this.P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+    this.X = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 
     //GROUP FOR GENERATING SQUARE ENEMIES
     enemysquare = this.physics.add.group({       
@@ -79,8 +81,10 @@ class StartScene extends Phaser.Scene {
     this.scene.bringToTop(ccontrols);
     llevels = this.physics.add.staticImage(400, 550, "levels").setScale(1);
     this.scene.bringToTop(llevels);
-    pplay = this.physics.add.staticImage(550, 550, "play").setScale(1);
+    pplay = this.physics.add.staticImage(400, 500, "play").setScale(1);
     this.scene.bringToTop(pplay);
+    credits = this.physics.add.staticImage(550, 550, "credits").setScale(1);
+    this.scene.bringToTop(credits);
     }
 
     update()
@@ -94,6 +98,10 @@ class StartScene extends Phaser.Scene {
             this.scene.start('LevelsScene');
         };
         if(Phaser.Input.Keyboard.JustDown(this.C)) {
+            console.log('Start create');
+            this.scene.start('CreditsScene');
+        };
+        if(Phaser.Input.Keyboard.JustDown(this.X)) {
             console.log('Start create');
             this.scene.start('ControlsScene');
         };

@@ -15,6 +15,12 @@ var plat2;
 var plat3;
 var plat4;
 var count2;
+var bulletCount;
+var score;
+var scoretxt;
+var bullettxt;
+var accuracy;
+var accuracytxt;
 
 class PlayScene2 extends Phaser.Scene {
     constructor(){
@@ -23,7 +29,20 @@ class PlayScene2 extends Phaser.Scene {
 
     create()
     {
+        //INITIALIZING VALUES
+        score = 0;
         count2 = 0;
+        bulletCount = 0;
+        accuracy = 0;
+
+        //SETTING SCORE BAR
+        scoretxt = this.add.text(600, 16, 'score: 0', { fontSize: '16px', fill: '#fff' });
+        this.scene.bringToTop(scoretxt);
+        bullettxt = this.add.text(16, 16, 'bullets: 0', { fontSize: '16px', fill: '#fff' });
+        this.scene.bringToTop(bulletCount);
+        accuracytxt = this.add.text(200,16, 'accuracy: 0 %', { fontSize: '14px', fill: '#fff' });
+        this.scene.bringToTop(accuracytxt);
+
         //SET UP INPUT FOR PLAYER MOVING LEFT AND RIGHT
         cursors = this.input.keyboard.createCursorKeys();
      
@@ -37,6 +56,8 @@ class PlayScene2 extends Phaser.Scene {
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         //MAINMENU
         this.M = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        //NEXT
+        this.N = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
                  
         //GENERATES THE PLAYER SPRITE
         player = this.physics.add.sprite(400,582, "square");
@@ -80,7 +101,8 @@ class PlayScene2 extends Phaser.Scene {
     {
         console.log("Game is Over!")
         var gmo = this.add.image(400, 300, "gameover");
-        var restart = this.add.image(400, 520, "restart");
+        var rrestart = this.physics.add.staticImage(300,550, "rrestart").setScale(1);
+        var mainmenu = this.physics.add.staticImage(500, 550, "mainmenu").setScale(1);  
     }
     
     //FUNCTION FOR DESTROYING ENEMY
@@ -91,7 +113,8 @@ class PlayScene2 extends Phaser.Scene {
         first.destroy();
         second.destroy();
         count2++;
-        console.log(count2);
+        accuracytxt.setText('Accuracy: ' + accuracy + '%');
+        scoretxt.setText('Score: ' + score);
     }
 
     //FUNCTION FOR DESTROYING BULLET
@@ -107,6 +130,12 @@ class PlayScene2 extends Phaser.Scene {
     
     update()
     {
+        if(bulletCount>0)
+        {
+            accuracy = Number(((count2/bulletCount)*100).toFixed(2));
+            score = count2*10;
+        }
+
         //GIVES THE PLAYER BODY FRICTION, SO THAT THE ADDED VELOCITY DOESN'T KEEP HIM SLIDING
         player.body.velocity.x *= 0.9;
         player.body.velocity.y *= 0.9;
@@ -124,7 +153,20 @@ class PlayScene2 extends Phaser.Scene {
         //SET THE KILL COUNT FOR GOING TO NEXT SCENE
         if(count2 >= 11)
         {
-             this.scene.start("PlayScene3");
+            var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
+            var next = this.physics.add.staticImage(400,500, "next").setScale(1);
+            scoretxt = this.add.text(220, 210, 'score: '+score, { fontSize: '32px', fill: '#000' });
+            this.scene.bringToTop(scoretxt);
+            bullettxt = this.add.text(270, 260, 'bullets: '+bulletCount, { fontSize: '32px', fill: '#000' });
+            this.scene.bringToTop(bulletCount);
+            accuracytxt = this.add.text(320,310, 'accuracy: '+accuracy+ '%', { fontSize: '32px', fill: '#000' });
+            this.scene.bringToTop(accuracytxt);
+            var nexttxt = this.add.text()
+
+            if(Phaser.Input.Keyboard.JustDown(this.N))
+            {
+                this.scene.start("PlayScene3");
+            }
         }
 
         //ROTATES THE SQUARES AROUND THE CORES
@@ -133,14 +175,18 @@ class PlayScene2 extends Phaser.Scene {
         //CALLS FUNCTION FOR SWARM BEHAVIOUR
         swarm.swarmblocks(core, blocks);
     
-        //shoot bullets by pressing spacebar
+        //shoot bullets by pressing spacebar and updating score results
         if(Phaser.Input.Keyboard.JustDown(this.spacebar))
         {
             console.log(this.bullet);
             let mybullet = bullets.get();
             if(mybullet) 
             {
-               mybullet.fire(player);
+                bulletCount++;
+                bullettxt.setText('Bullets: ' + bulletCount);
+                accuracytxt.setText('Accuracy: ' + accuracy + '%');
+                scoretxt.setText('Score: ' + score);
+                mybullet.fire(player);
             }
         }
         

@@ -40,6 +40,11 @@ class PreloadScene extends Phaser.Scene {
         this.load.image("lvl2", "./assets/lvl2.png");
         this.load.image("lvl3", "./assets/lvl3.png");
         this.load.image("lvl4", "./assets/lvl4.png");
+        this.load.image("resultsBg", "./assets/results_bg.png");
+        this.load.image("next", "./assets/next.png");
+        this.load.image("hamed", "./assets/hamed.png");
+        this.load.image("vladimir", "./assets/vladimir.png");
+        this.load.image("credits", "./assets/credits.png");
         
       
       }

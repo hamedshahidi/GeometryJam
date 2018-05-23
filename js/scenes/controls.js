@@ -17,7 +17,7 @@ class ControlsScene extends Phaser.Scene {
         var left = this.physics.add.staticImage(500,350, "left").setScale(1);
         var right = this.physics.add.staticImage(570,350, "right").setScale(1);
 
-        var rrestart = this.physics.add.staticImage(300,250, "rrestart").setScale(1);
+        var rrestart = this.physics.add.staticImage(280,250, "rrestart").setScale(1);
         var mainmenu = this.physics.add.staticImage(500, 250, "mainmenu").setScale(1);
 
         //GROUP FOR GENERATING SQUARE ENEMIES
