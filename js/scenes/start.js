@@ -9,6 +9,9 @@ var core;
 var core_2;
 var logoBorder;
 var logoTxt;
+var ccontrols;
+var llevels;
+var pplay;
 
 class StartScene extends Phaser.Scene {
     constructor(){
@@ -19,15 +22,10 @@ class StartScene extends Phaser.Scene {
 
     logoBorder = this.physics.add.staticImage(400,300, "logoBorder").setScale(1);
 
-    //this.startBtn.create(300, 400, 'startBtn').setScale(0.3);
-
-    startBtn = this.physics.add.staticImage(400, 500, "start");
-
-    //this.startBtn.on('pointerover', function (event) {  });
-    // this.startBtn.on('pointerout', function (event) {  });
-    //this.startBtn.on('pointerdown', startGame); 
-
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.C = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+    this.L = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
+    this.P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
     //GROUP FOR GENERATING SQUARE ENEMIES
     enemysquare = this.physics.add.group({       
@@ -77,13 +75,27 @@ class StartScene extends Phaser.Scene {
     swarm = new enemy();
     logoTxt = this.physics.add.staticImage(400,300, "logoTxt").setScale(1);
     this.scene.bringToTop(logoTxt);
+    ccontrols = this.physics.add.staticImage(250, 550, "controls").setScale(1);
+    this.scene.bringToTop(ccontrols);
+    llevels = this.physics.add.staticImage(400, 550, "levels").setScale(1);
+    this.scene.bringToTop(llevels);
+    pplay = this.physics.add.staticImage(550, 550, "play").setScale(1);
+    this.scene.bringToTop(pplay);
     }
 
     update()
     {
-        if(Phaser.Input.Keyboard.JustDown(this.spacebar)) {
+        if(Phaser.Input.Keyboard.JustDown(this.P)) {
             console.log('Start create');
             this.scene.start('PlayScene1');
+        };
+        if(Phaser.Input.Keyboard.JustDown(this.L)) {
+            console.log('Start create');
+            this.scene.start('LevelsScene');
+        };
+        if(Phaser.Input.Keyboard.JustDown(this.C)) {
+            console.log('Start create');
+            this.scene.start('ControlsScene');
         };
         swarm.swarmblocks(core, blocks);
         swarm.swarmblocks(core_2, blocks_2);

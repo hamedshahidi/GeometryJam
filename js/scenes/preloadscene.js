@@ -26,8 +26,21 @@ class PreloadScene extends Phaser.Scene {
         this.load.image("logoTxt", "./assets/logo_txt.png");
         this.load.image("logoBorder", "./assets/logo_border.png");
         this.load.image("gameover", "./assets/gameover.png");
-        this.load.image("start", "./assets/start.png");
+        this.load.image("play", "./assets/pplay.png");
+        this.load.image("levels", "./assets/llevels.png");
+        this.load.image("controls", "./assets/ccontrols.png");
         this.load.image("restart", "./assets/restart.png");
+        this.load.image("rrestart", "./assets/rrestart.png");
+        this.load.image("back", "./assets/bback.png");
+        this.load.image("left", "./assets/left.png");
+        this.load.image("right", "./assets/right.png");
+        this.load.image("spacebar", "./assets/spacebar.png");
+        this.load.image("mainmenu", "./assets/mainmenu.png");
+        this.load.image("lvl1", "./assets/lvl1.png");
+        this.load.image("lvl2", "./assets/lvl2.png");
+        this.load.image("lvl3", "./assets/lvl3.png");
+        this.load.image("lvl4", "./assets/lvl4.png");
+        
       
       }
       

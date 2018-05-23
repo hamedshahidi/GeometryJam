@@ -35,6 +35,7 @@ class PlayScene1 extends Phaser.Scene {
         //NEXT SCENE
         this.Q = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
         this.R = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        this.M = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
                
         //GENERATES THE PLAYER SPRITE
         player = this.physics.add.sprite(400,582 , "square");
@@ -145,7 +146,10 @@ class PlayScene1 extends Phaser.Scene {
 
         if(Phaser.Input.Keyboard.JustDown(this.R))
         {
-            console.log("1");
+            this.scene.start("PlayScene1");
+        }
+        if(Phaser.Input.Keyboard.JustDown(this.M))
+        {
             this.scene.start("StartScene");
         }
     }
