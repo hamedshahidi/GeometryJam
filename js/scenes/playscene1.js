@@ -21,7 +21,7 @@ var scoretxt;
 var bullettxt;
 var accuracytxt;
 var accuracy;
-var trigger = null;
+var trigger = false;
 
 
 class PlayScene1 extends Phaser.Scene {
@@ -37,7 +37,7 @@ class PlayScene1 extends Phaser.Scene {
         bulletCount = 0;
         accuracy = 0;
         count1 = 0;
-        trigger = null;
+        trigger = false;
 
         //SETTING SCORE BAR
         scoretxt = this.add.text(600, 16, 'score: 0', { fontSize: '14px', fill: '#fff' });
@@ -171,21 +171,28 @@ class PlayScene1 extends Phaser.Scene {
         }
 
         //SET THE KILL COUNT FOR GOING TO NEXT SCENE
-        if(count1 >= 10 && trigger == null)
+        if(count1 >= 10 && trigger == false)
         {
-            trigger = 1;
+            if (trigger == false)
+            {
+                var scoreResult = score;
+                var bulletResult = bulletCount;
+                var accuracyResult = accuracy;
+                trigger = true;
+            }
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
             var next = this.physics.add.staticImage(400,500, "next").setScale(1);
-            scoretxt = this.add.text(220, 230, 'score: '+score, { fontSize: '32px', fill: '#000' });
+            scoretxt = this.add.text(220, 230, 'score: '+scoreResult, { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(scoretxt);
-            bullettxt = this.add.text(270, 280, 'bullets: '+bulletCount, { fontSize: '32px', fill: '#000' });
+            bullettxt = this.add.text(270, 280, 'bullets: '+bulletResult, { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(bulletCount);
-            accuracytxt = this.add.text(320,330, 'accuracy: '+accuracy+ '%', { fontSize: '32px', fill: '#000' });
+            accuracytxt = this.add.text(320,330, 'accuracy: '+accuracyResult+ '%', { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(accuracytxt);
             var nexttxt = this.add.text()
+            
         }
 
-        if(trigger == 1 && Phaser.Input.Keyboard.JustDown(this.N))
+        if(trigger == true && Phaser.Input.Keyboard.JustDown(this.N))
             {
                 this.scene.start("PlayScene2");
             }

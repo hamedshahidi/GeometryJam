@@ -174,14 +174,20 @@ class PlayScene3 extends Phaser.Scene {
 
         if(count3 >= 1 && trigger == null)
         {
-            trigger = 1;
+            if (trigger == null)
+            {
+                var scoreResult = score;
+                var bulletResult = bulletCount;
+                var accuracyResult = accuracy;
+                trigger = 1;
+            }
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
             var next = this.physics.add.staticImage(400,500, "next").setScale(1);
-            scoretxt = this.add.text(220, 230, 'score: '+score, { fontSize: '32px', fill: '#000' });
+            scoretxt = this.add.text(220, 230, 'score: '+scoreResult, { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(scoretxt);
-            bullettxt = this.add.text(270, 280, 'bullets: '+bulletCount, { fontSize: '32px', fill: '#000' });
+            bullettxt = this.add.text(270, 280, 'bullets: '+bulletResult, { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(bulletCount);
-            accuracytxt = this.add.text(320,330, 'accuracy: '+accuracy+ '%', { fontSize: '32px', fill: '#000' });
+            accuracytxt = this.add.text(320,330, 'accuracy: '+accuracyResult+ '%', { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(accuracytxt);
             var nexttxt = this.add.text()
         }
