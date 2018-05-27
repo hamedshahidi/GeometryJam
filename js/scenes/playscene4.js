@@ -25,6 +25,7 @@ var score;
 var scoretxt;
 var bullettxt;
 var accuracy;
+var trigger = null
 
 class PlayScene4 extends Phaser.Scene {
     constructor(){
@@ -38,7 +39,7 @@ class PlayScene4 extends Phaser.Scene {
         count4 = 0;
         bulletCount = 0;
         accuracy = 0;
-        var trigger = null;
+        trigger = null;
 
         //SETTING SCORE BAR
         scoretxt = this.add.text(600, 16, 'score: 0', { fontSize: '16px', fill: '#fff' });
@@ -187,7 +188,7 @@ class PlayScene4 extends Phaser.Scene {
         }
 
         //SET THE KILL COUNT FOR GOING TO NEXT SCENE
-        if(count4 >= 42 && trigger === null)
+        if(count4 >= 42 && trigger == null)
         {
             trigger = 1;
             var resultsBg = this.physics.add.staticImage(400,300, "resultsBg").setScale(1);
@@ -199,11 +200,11 @@ class PlayScene4 extends Phaser.Scene {
             accuracytxt = this.add.text(320,330, 'accuracy: '+accuracy+ '%', { fontSize: '32px', fill: '#000' });
             this.scene.bringToTop(accuracytxt);
             var nexttxt = this.add.text()
+        }
 
-            if(Phaser.Input.Keyboard.JustDown(this.M))
-            {
-                this.scene.start("StartScene");
-            }
+        if(trigger == 1 && Phaser.Input.Keyboard.JustDown(this.M))
+        {
+            this.scene.start("StartScene");
         }
       
 
